@@ -1,5 +1,5 @@
 ###
- * jQuery.scroller
+ * jQuery.carousel
  * A simple jQuery plugin for content carousels
  * Author: Ben Saufley
  *   for Millennium Partners Sports Club Management, LLC

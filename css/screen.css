@@ -1,0 +1,213 @@
+/* line 17, ../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline; }
+
+/* line 22, ../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1; }
+
+/* line 24, ../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none; }
+
+/* line 26, ../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* line 28, ../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle; }
+
+/* line 30, ../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none; }
+  /* line 103, ../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+  q:before, q:after, blockquote:before, blockquote:after {
+    content: "";
+    content: none; }
+
+/* line 32, ../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none; }
+
+/* line 116, ../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block; }
+
+/* line 6, sass/screen.sass */
+body {
+  font-family: "Avenir", "Avenir Lt Std", "century gothic", CenturyGothic, Futura, sans-serif;
+  font-weight: 200;
+  text-align: center; }
+
+/* line 11, sass/screen.sass */
+h1, h2 {
+  font-weight: 600;
+  margin-bottom: 0.4em; }
+
+/* line 14, sass/screen.sass */
+h1 {
+  font-size: 1.4em;
+  margin-top: 0.4em;
+  text-align: center;
+  -webkit-transition: color 0.3s;
+  -moz-transition: color 0.3s;
+  -o-transition: color 0.3s;
+  transition: color 0.3s; }
+
+/* line 20, sass/screen.sass */
+p {
+  margin-bottom: 0.3em; }
+
+/* line 23, sass/screen.sass */
+button, input {
+  font-size: 2em;
+  font-family: "Avenir", "Avenir Lt Std", "century gothic", CenturyGothic, Futura, sans-serif;
+  font-weight: 600;
+  text-align: center;
+  width: 300;
+  background-color: white;
+  border: 1px solid #f47321;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px; }
+
+/* line 32, sass/screen.sass */
+button {
+  background-color: #fcdecb; }
+  /* line 34, sass/screen.sass */
+  button:hover {
+    background-color: #f47321;
+    color: white; }
+  /* line 37, sass/screen.sass */
+  button.active {
+    color: #f47321;
+    background-color: #fac09a;
+    border-color: #f47321; }
+
+/* line 41, sass/screen.sass */
+#scrollspeed {
+  width: 5em; }
+  /* line 43, sass/screen.sass */
+  #scrollspeed[disabled] {
+    color: #cccccc;
+    border-color: #cccccc; }
+
+/* line 47, sass/screen.sass */
+#scroller {
+  width: 100%;
+  height: 400px;
+  margin: 0 auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  text-align: left; }
+  /* line 54, sass/screen.sass */
+  #scroller ul {
+    height: 100%;
+    list-style: none;
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse; }
+    /* line 61, sass/screen.sass */
+    #scroller ul li {
+      list-style: none;
+      display: table-cell;
+      table-layout: fixed;
+      vertical-align: middle;
+      width: 280px;
+      padding: 10px; }
+      /* line 68, sass/screen.sass */
+      #scroller ul li div.blocky {
+        width: 100%;
+        height: 200px;
+        background: #dfdfdf;
+        border: 1px solid #cccccc;
+        -webkit-transition: box-shadow 0.3s;
+        -moz-transition: box-shadow 0.3s;
+        -o-transition: box-shadow 0.3s;
+        transition: box-shadow 0.3s; }
+      /* line 74, sass/screen.sass */
+      #scroller ul li .extra {
+        display: none; }
+      /* line 77, sass/screen.sass */
+      #scroller ul li.nojs div.extra {
+        display: block;
+        -webkit-transition: height 0.5s;
+        -moz-transition: height 0.5s;
+        -o-transition: height 0.5s;
+        transition: height 0.5s;
+        height: 0;
+        overflow: hidden; }
+      /* line 83, sass/screen.sass */
+      #scroller ul li.nojs:hover div.extra {
+        margin-top: 0.4em;
+        height: 225px; }
+      /* line 87, sass/screen.sass */
+      #scroller ul li.focus h1 {
+        color: #f47321; }
+      /* line 89, sass/screen.sass */
+      #scroller ul li.focus .blocky {
+        -webkit-box-shadow: 0 3px 6px #444444;
+        -moz-box-shadow: 0 3px 6px #444444;
+        box-shadow: 0 3px 6px #444444; }
+      /* line 91, sass/screen.sass */
+      #scroller ul li.focus div.extra {
+        margin-top: 0.4em; }
+  /* line 94, sass/screen.sass */
+  #scroller .next, #scroller .prev {
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    white-space: nowrap;
+    position: absolute;
+    top: 50%;
+    margin-top: -40px;
+    cursor: pointer;
+    border: 1px solid #aaaaaa;
+    background-color: #333333;
+    background-color: rgba(0, 0, 0, 0.6);
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    padding: 10px; }
+  /* line 110, sass/screen.sass */
+  #scroller .next {
+    right: 0;
+    border-right: 0;
+    -webkit-border-radius: 4px 0 0 4px;
+    -moz-border-radius: 4px 0 0 4px;
+    -ms-border-radius: 4px 0 0 4px;
+    -o-border-radius: 4px 0 0 4px;
+    border-radius: 4px 0 0 4px; }
+  /* line 114, sass/screen.sass */
+  #scroller .prev {
+    left: 0;
+    border-left: 0;
+    -webkit-border-radius: 0 4px 4px 0;
+    -moz-border-radius: 0 4px 4px 0;
+    -ms-border-radius: 0 4px 4px 0;
+    -o-border-radius: 0 4px 4px 0;
+    border-radius: 0 4px 4px 0; }

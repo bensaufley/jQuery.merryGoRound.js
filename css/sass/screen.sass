@@ -1,0 +1,117 @@
+@import compass
+@import compass/reset
+
+$fontstack: 'Avenir', 'Avenir Lt Std', 'century gothic', CenturyGothic, Futura, sans-serif
+
+body
+  font-family: $fontstack
+  font-weight: 200
+  text-align: center
+
+h1, h2
+  font-weight: 600
+  margin-bottom: .4em
+h1
+  font-size: 1.4em
+  margin-top: .4em
+  text-align: center
+  @include transition(color .3s)
+
+p
+  margin-bottom: .3em
+
+button, input
+  font-size: 2em
+  font-family: $fontstack
+  font-weight: 600
+  text-align: center
+  width: 300
+  background-color: #fff
+  border: 1px solid #f47321
+  @include border-radius(3px)
+button
+  background-color: lighten(#f47321,35%)
+  &:hover
+    background-color: #f47321
+    color: #fff
+  &.active
+    color: #f47321
+    background-color: lighten(#f47321,25%)
+    border-color: #f47321
+#scrollspeed
+  width: 5em
+  &[disabled]
+    color: #ccc
+    border-color: #ccc
+
+#scroller
+  width: 100%
+  height: 400px
+  margin: 0 auto
+  overflow-x: auto
+  overflow-y: hidden
+  text-align: left
+  ul
+    height: 100%
+    list-style: none
+    display: table
+    table-layout: fixed
+    width: 100%
+    border-collapse: collapse
+    li
+      list-style: none
+      display: table-cell
+      table-layout: fixed
+      vertical-align: middle
+      width: 280px
+      padding: 10px
+      div.blocky
+        width: 100%
+        height: 200px
+        background: #dfdfdf
+        border: 1px solid #ccc
+        @include transition(box-shadow .3s)
+      .extra
+        display: none
+      &.nojs
+        div.extra
+          display: block
+          @include transition(height .5s)
+          height: 0
+          overflow: hidden
+        &:hover
+          div.extra
+            margin-top: .4em
+            height: 225px
+      &.focus
+        h1
+          color: #f47321
+        .blocky
+          @include box-shadow(0 3px 6px #444)
+        div.extra
+          margin-top: .4em
+  // Slider Controls
+  .next, .prev
+    width: 60px
+    height: 60px
+    overflow: hidden
+    white-space: nowrap
+    position: absolute
+    top: 50%
+    margin-top: -40px
+    cursor: pointer
+    border: 1px solid #aaa
+    background-color: #333
+    background-color: rgba(0,0,0,.6)
+    text-align: center
+    vertical-align: middle
+    color: #fff
+    padding: 10px
+  .next
+    right: 0
+    border-right: 0
+    @include border-radius(4px 0 0 4px)
+  .prev
+    left: 0
+    border-left: 0
+    @include border-radius (0 4px 4px 0)

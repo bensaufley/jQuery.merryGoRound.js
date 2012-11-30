@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="../jquery.1.8.3.min.js"></script>
+<script src="js/jquery.scroller.js"></script>
+<script>
+$(document).ready(function() {
+  $('#scroller').scroller({
+    'focused' : $('.nojs')[1],
+//    'infinite': true,
+//    'auto' : 3000,
+    'typewriter' : true,
+    'easing'  : 'swing',
+    'speed'   : 300,
+    'onInit'  : function($sel) {
+      $sel.addClass('focus').find('.extra').show()
+    },
+    'onStart' : function($sel) {
+      $('#scroller').find('.extra').slideUp(100)
+    },
+    'onComplete' : function($sel) {
+      $sel.find('.extra').slideDown(100)
+    }
+//    'infinite': true
+  })
+  $(document).on('click tap', '#scroller li', function() {
+    $('#scroller').scroller('moveTo',$(this))
+  })
+  $('button.auto').toggle(
+    function() {
+      $(this).addClass('active').text('Turn off Auto-Scroll')
+      $('#scroller').scroller('startAuto',$('#scrollspeed').val() * 1000)
+      $('#scrollspeed').attr('disabled','disabled')
+    },
+    function() {
+      $(this).removeClass('active').text('Turn on Auto-Scroll')
+      $('#scrollspeed').removeAttr('disabled')
+      $('#scroller').scroller('stopAuto')
+    })
+})
+</script>
+<link rel="stylesheet" href="css/screen.css" />
+</head>
+<body>
+<button class="auto">Turn on Auto-Scroll</button>
+<input type="number" id="scrollspeed" value="2"> seconds delay
+<div id="scroller">
+  <ul>
+    <li class="nojs">
+      <div class="blocky"></div>
+      <h1>1979</h1>
+      <div class="extra">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <p>Nullam vitae ligula tellus, in rutrum odio.</p>
+        <p>Proin imperdiet felis a felis mollis posuere.</p>
+      </div>
+    </li>
+    <li class="nojs">
+      <div class="blocky"></div>
+      <h1>1981</h1>
+      <div class="extra">
+        <p>Ut at lorem nec est condimentum cursus.</p>
+        <p>Sed et dolor vel felis eleifend ultricies.</p>
+      </div>
+    </li>
+    <li class="nojs">
+      <div class="blocky"></div>
+      <h1>1983</h1>
+      <div class="extra">
+        <p>Maecenas ultrices ante eget elit lacinia quis congue est ultricies.</p>
+        <p>Suspendisse placerat nisl nec diam pretium sagittis.</p>
+        <p>Sed consectetur sem eget nisi luctus a feugiat sapien lobortis.</p>
+      </div>
+    </li>
+    <li class="nojs">
+      <div class="blocky"></div>
+      <h1>1984</h1>
+      <div class="extra">
+        <p>Ut at lorem nec est condimentum cursus.</p>
+        <p>Sed et dolor vel felis eleifend ultricies.</p>
+      </div>
+    </li>
+    <li class="nojs">
+      <div class="blocky"></div>
+      <h1>1985</h1>
+      <div class="extra">
+        <p>Maecenas ultrices ante eget elit lacinia quis congue est ultricies.</p>
+        <p>Suspendisse placerat nisl nec diam pretium sagittis.</p>
+        <p>Sed consectetur sem eget nisi luctus a feugiat sapien lobortis.</p>
+      </div>
+    </li>
+    <li class="nojs">
+      <div class="blocky"></div>
+      <h1>1986</h1>
+      <div class="extra">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <p>Nullam vitae ligula tellus, in rutrum odio.</p>
+        <p>Proin imperdiet felis a felis mollis posuere.</p>
+      </div>
+    </li>
+    <li class="nojs">
+      <div class="blocky"></div>
+      <h1>1990</h1>
+      <div class="extra">
+        <p>Ut at lorem nec est condimentum cursus.</p>
+        <p>Sed et dolor vel felis eleifend ultricies.</p>
+      </div>
+    </li>
+    <li class="nojs">
+      <div class="blocky"></div>
+      <h1>1991</h1>
+      <div class="extra">
+        <p>Maecenas ultrices ante eget elit lacinia quis congue est ultricies.</p>
+        <p>Suspendisse placerat nisl nec diam pretium sagittis.</p>
+        <p>Sed consectetur sem eget nisi luctus a feugiat sapien lobortis.</p>
+      </div>
+    </li>
+    <li class="nojs">
+      <div class="blocky"></div>
+      <h1>1994</h1>
+      <div class="extra">
+        <p>Ut at lorem nec est condimentum cursus.</p>
+        <p>Sed et dolor vel felis eleifend ultricies.</p>
+      </div>
+    </li>
+    <li class="nojs">
+      <div class="blocky"></div>
+      <h1>1997</h1>
+      <div class="extra">
+        <p>Maecenas ultrices ante eget elit lacinia quis congue est ultricies.</p>
+        <p>Suspendisse placerat nisl nec diam pretium sagittis.</p>
+        <p>Sed consectetur sem eget nisi luctus a feugiat sapien lobortis.</p>
+      </div>
+    </li>
+    <li class="nojs">
+      <div class="blocky"></div>
+      <h1>2000</h1>
+      <div class="extra">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <p>Nullam vitae ligula tellus, in rutrum odio.</p>
+        <p>Proin imperdiet felis a felis mollis posuere.</p>
+      </div>
+    </li>
+    <li class="nojs">
+      <div class="blocky"></div>
+      <h1>2001</h1>
+      <div class="extra">
+        <p>Ut at lorem nec est condimentum cursus.</p>
+        <p>Sed et dolor vel felis eleifend ultricies.</p>
+      </div>
+    </li>
+    <li class="nojs">
+      <div class="blocky"></div>
+      <h1>2003</h1>
+      <div class="extra">
+        <p>Maecenas ultrices ante eget elit lacinia quis congue est ultricies.</p>
+        <p>Suspendisse placerat nisl nec diam pretium sagittis.</p>
+        <p>Sed consectetur sem eget nisi luctus a feugiat sapien lobortis.</p>
+      </div>
+    </li>
+    <li class="nojs">
+      <div class="blocky"></div>
+      <h1>2005</h1>
+      <div class="extra">
+        <p>Ut at lorem nec est condimentum cursus.</p>
+        <p>Sed et dolor vel felis eleifend ultricies.</p>
+      </div>
+    </li>
+    <li class="nojs">
+      <div class="blocky"></div>
+      <h1>2013</h1>
+      <div class="extra">
+        <p>Maecenas ultrices ante eget elit lacinia quis congue est ultricies.</p>
+        <p>Suspendisse placerat nisl nec diam pretium sagittis.</p>
+        <p>Sed consectetur sem eget nisi luctus a feugiat sapien lobortis.</p>
+      </div>
+    </li>
+  </ul>
+</div>
+
+</body>
+</html>

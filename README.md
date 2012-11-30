@@ -1,6 +1,6 @@
 # jQuery.Carousel.js #
 
-A simple, lightweight jQuery plugin for horizontally-scrolling content blocks
+A simple, lightweight jQuery plugin for horizontally-scrolling content blocks. Because what everyone really needed was one more carousel plugin.
 
 by Ben Saufley ([@bensaufley](http://twitter.com/bensaufley))  
 <http://bensaufley.com>

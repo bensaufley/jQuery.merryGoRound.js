@@ -100,18 +100,18 @@ Methods can be applied to an active carousel instance like so:
     $('#frame').carousel('option','onComplete',function() { }) // Changes onComplete function to empty function
     $('#frame').carousel('startAuto') // Starts automatic scrolling
 
-- `option` (*function([opt])*):
+- `option` ( *function([opt])* ):
     - If one value is passed, it returns the value of the option.
     - If two values are passed, it sets the value of the option.
-- `destroy` (*function()*): Destroys the instance of jQuery.Carousel
-- `fill` (*function()*): Fills the space of the frame element with duplicate sets of the container's children until the container is wider than the frame. This is run on initialization, but may need to be run on window.resize for example
-- `onLast` (*bool*): Whether the carousel is on the last object
-- `onFirst` (*bool*): Whether the carousel is on the first object
-- `moveTo` (*function($e)*): Function that can be passed a child element of the container to scroll directly to that object. Eg:  
+- `destroy` ( *function()* ): Destroys the instance of jQuery.Carousel
+- `fill` ( *function()* ): Fills the space of the frame element with duplicate sets of the container's children until the container is wider than the frame. This is run on initialization, but may need to be run on window.resize for example
+- `onLast` ( *bool* ): Whether the carousel is on the last object
+- `onFirst` ( *bool* ): Whether the carousel is on the first object
+- `moveTo` ( *function($e)* ): Function that can be passed a child element of the container to scroll directly to that object. Eg:  
       $(document).on('click tap','#frame > .container > *',function() {
         $('#frame').carousel('moveTo',$(this))
       })
-- `next` (*function()*): Triggers the carousel to move to the next object if available. Useful for custom navigation.
-- `prev` (*function()*): Triggers the carousel to move to the previous object if available. Useful for custom navigation.
-- `startAuto` (*function()*): Starts auto-scroll.
-- `stopAuto` (*function()*): Stops auto-scroll.
+- `next` ( *function()* ): Triggers the carousel to move to the next object if available. Useful for custom navigation.
+- `prev` ( *function()* ): Triggers the carousel to move to the previous object if available. Useful for custom navigation.
+- `startAuto` ( *function()* ): Starts auto-scroll.
+- `stopAuto` ( *function()* ): Stops auto-scroll.

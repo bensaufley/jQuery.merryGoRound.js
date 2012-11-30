@@ -311,7 +311,8 @@
       hover: false,
       auto: false,
       onInit: function() {},
-      onChange: function() {},
+      onStart: function() {},
+      onComplete: function() {},
       onDestroy: function() {}
     };
   })(jQuery);

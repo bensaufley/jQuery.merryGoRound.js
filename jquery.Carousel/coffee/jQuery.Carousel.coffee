@@ -242,7 +242,8 @@
     hover      : false
     auto       : false
     onInit     : ->
-    onChange   : ->
+    onStart    : ->
+    onComplete : ->
     onDestroy  : ->
 
 )(jQuery)

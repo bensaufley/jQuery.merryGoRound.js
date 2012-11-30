@@ -40,9 +40,8 @@
       else
         options.focused = $c.children().first()
       if options.infinite
-        #if $c.children().first()[0]!=options.focused[0]
-        #  $c.children().first().add($c.children().first().nextUntil($(options.focused))).appendTo($c)
-        moveTo(options.focused,0,true)
+        if $c.children().first()[0]!=options.focused[0]
+          $c.children().first().add($c.children().first().nextUntil($(options.focused))).appendTo($c)
         $(options.focused).addClass(options.focus_class) if options.focus_class
         fill()
       else

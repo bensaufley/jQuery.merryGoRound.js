@@ -42,7 +42,9 @@
           options.focused = $c.children().first();
         }
         if (options.infinite) {
-          moveTo(options.focused, 0, true);
+          if ($c.children().first()[0] !== options.focused[0]) {
+            $c.children().first().add($c.children().first().nextUntil($(options.focused))).appendTo($c);
+          }
           if (options.focus_class) {
             $(options.focused).addClass(options.focus_class);
           }

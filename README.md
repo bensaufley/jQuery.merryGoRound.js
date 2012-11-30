@@ -39,20 +39,20 @@ Options can be set on initialization like so:
 
 - `auto`:
     - Auto-scroll.
-    - **Default:** false
+    - **Default:** `false`
 - `infinite`:
     - Infinite scrolling.
-    - **Default:** false
+    - **Default:** `false`
 - `easing`:
     - jQuery easing value. This plugin doesn't use jQuery UI so the only two options are `swing` and `linear`. You should be able to use more if you include jQuery UI's easing controls.
-    - **Default:** 'linear'
+    - **Default:** `'linear'`
 - `typewriter`:
     - Wraparound effect for non-infinite scrolling. When the user gets to the end of the set, the "next" button will remain, and triggering it will send the user back (like a typewriter resetting) to the start. The inverse is true with the "previous" button.  
     If set as `false`, the "next" and "previous" buttons fade out when on last and first elements respectively.
-    - **Default:** false
+    - **Default:** `false`
 - `speed`:
     - Scroll speed.
-    - **Default:** 300
+    - **Default:** `300`
 - `next_class`
     - Class for `div` element which will function as "next" button. Carousel creates this element and appends it to the container object. 
     - **Default:** `'next'`
@@ -61,36 +61,36 @@ Options can be set on initialization like so:
     - **Default:** `'prev'`
 - `nojs_class`:
     - Class to signify that the frame element. Set as `false` if you don't need it. 
-    - **Default:** 'nojs'
+    - **Default:** `'nojs'`
 - `focus_class`:
     - Class to add to the element currently in focus. Set as `false` if you don't need it.
-    - **Default:** 'focus'
+    - **Default:** `'focus'`
 - `onInit`:
     - Function that passes the currently-focused child in a jQuery object for manipulation after the carousel is initialized.
-    - **Default:** Empty function
+    - **Default:** `function($sel) { }`
 - `onStart`:
     - Function that passes the currently-focused child in a jQuery object for manipulation before moving the carousel.
     - Example usage: to de-emphasize the focused object before the focus changes:
         function($sel) {
           $sel.animate({ 'font-size' : 10px }, 300)
         }
-    - **Default:** Empty function
+    - **Default:** `function($sel) { }`
 - `onComplete`:
     - Function that passes the currently-focused child in a jQuery object for manipulation after moving the carousel.
     - Example usage: to emphasize the newly-focused object after the focus changes:
         function($sel) {
           $sel.animate({ 'font-size' : 16px }, 300)
         }
-    - **Default:** Empty function
+    - **Default:** `function($sel) { }`
 - `onDestroy`:
     - Function to run after the carousel is destroyed.
-    - **Default:** Empty function
+    - **Default:** `function($sel) { }`
 - `hover`:
     - The hover state. Used to stop auto-scrolling when the mouse is hovering over the carousel. Not sure there's any use in manipulating it, but here it is if you need to, or just to know it.
-    - **Default:** false
+    - **Default:** `false`
 - `focused`:
     - Stores the currently-focused object. Setting it on initialize will tell the plugin to focus on an element other than the first child of the container element.
-    - **Default:** false
+    - **Default:** `false`
 
 ## Methods ##
 

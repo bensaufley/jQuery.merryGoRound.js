@@ -7,7 +7,7 @@
  * Based on jQuery plugin boilerplate by Jonathan Nicol @f6design
 ###
 (($) ->
-  pluginName = 'scroller'
+  pluginName = 'carousel'
 
   # console = window.console || log: ->
 

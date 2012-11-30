@@ -5,7 +5,7 @@
 <script src="../jquery.Carousel/jquery.Carousel.js"></script>
 <script>
 $(document).ready(function() {
-  $('#scroller').scroller({
+  $('#scroller').carousel({
     'focused' : $('.nojs')[1],
     'infinite': true,
 //    'auto' : 3000,
@@ -24,18 +24,18 @@ $(document).ready(function() {
 //    'infinite': true
   })
   $(document).on('click tap', '#scroller li', function() {
-    $('#scroller').scroller('moveTo',$(this))
+    $('#scroller').carousel('moveTo',$(this))
   })
   $('button.auto').toggle(
     function() {
       $(this).addClass('active').text('Turn off Auto-Scroll')
-      $('#scroller').scroller('startAuto',$('#scrollspeed').val() * 1000)
+      $('#scroller').carousel('startAuto',$('#scrollspeed').val() * 1000)
       $('#scrollspeed').attr('disabled','disabled')
     },
     function() {
       $(this).removeClass('active').text('Turn on Auto-Scroll')
       $('#scrollspeed').removeAttr('disabled')
-      $('#scroller').scroller('stopAuto')
+      $('#scroller').carousel('stopAuto')
     })
 })
 </script>

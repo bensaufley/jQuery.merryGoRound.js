@@ -14,7 +14,7 @@
 
   (function($) {
     var Plugin, pluginName;
-    pluginName = 'scroller';
+    pluginName = 'carousel';
     Plugin = function(element, options) {
       var $c, $el, $next, $prev, destroy, el, fill, hook, hover, hoverUpdate, init, looper, moveTo, next, onFirst, onLast, option, prev, startAuto, stopAuto;
       el = element;

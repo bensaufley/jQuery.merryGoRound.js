@@ -3,8 +3,7 @@
  * jQuery.carousel
  * A simple jQuery plugin for content carousels
  * Author: Ben Saufley
- *   for Millennium Partners Sports Club Management, LLC
- *   http://sportsclubla.com
+ *     http://bensaufley.com
  * Based on jQuery plugin boilerplate by Jonathan Nicol @f6design
 */
 

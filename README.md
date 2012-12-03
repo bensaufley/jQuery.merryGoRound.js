@@ -10,7 +10,7 @@ by Ben Saufley ([@bensaufley](http://twitter.com/bensaufley))
 Simple **initialization** with all defaults:
 
 ```javascript
-    $('#frame').carousel()
+$('#frame').carousel()
 ```
 
 This requires at least two things:
@@ -23,7 +23,7 @@ The container object can be styled by setting its width and floating its childre
 To **revert** to original state/remove carousel
 
 ```javascript
-    $('#frame').carousel('destroy')
+$('#frame').carousel('destroy')
 ```
 
 One thing to note is that because of the way jQuery.Carousel loops for an infinite carousel, `$(document).on(event, '.selector', É)` must be used to apply event listeners to gallery objects.
@@ -33,14 +33,14 @@ One thing to note is that because of the way jQuery.Carousel loops for an infini
 Options can be set on initialization like so:
 
 ```javascript
-    $('#frame').carousel({
-      'auto'    : true,
-      'easing'  : 'swing',
-      'speed'   : 1500,
-      'onStart' : function($sel) {
-        $sel.animate({ 'border-width' : '10px' }, 300)
-      }
-    })
+$('#frame').carousel({
+  'auto'    : true,
+  'easing'  : 'swing',
+  'speed'   : 1500,
+  'onStart' : function($sel) {
+    $sel.animate({ 'border-width' : '10px' }, 300)
+  }
+})
 ```
 
 - `auto`:
@@ -76,22 +76,28 @@ Options can be set on initialization like so:
     - **Default:** `function($sel) { }`
 - `onStart`:
     - Function that passes the currently-focused child in a jQuery object for manipulation before moving the carousel.
-    - Example usage: to de-emphasize the focused object before the focus changes:
-      ```javascript
-      function($sel) {  
-        $sel.animate({ 'font-size' : 10px }, 300)  
-      }
-      ```
+    - Example usage: to de-emphasize the focused object before the focus changes.
     - **Default:** `function($sel) { }`
+    - Example:
+
+```javascript
+function($sel) {  
+  $sel.animate({ 'font-size' : 10px }, 300)  
+}
+```
+
 - `onComplete`:
     - Function that passes the currently-focused child in a jQuery object for manipulation after moving the carousel.
     - Example usage: to emphasize the newly-focused object after the focus changes:
-      ```javascript
-      function($sel) {  
-        $sel.animate({ 'font-size' : 16px }, 300)  
-      }
-      ```
     - **Default:** `function($sel) { }`
+    - Example:
+
+```javascript
+function($sel) {  
+  $sel.animate({ 'font-size' : 16px }, 300)  
+}
+```
+
 - `onDestroy`:
     - Function to run after the carousel is destroyed.
     - **Default:** `function($sel) { }`
@@ -107,9 +113,9 @@ Options can be set on initialization like so:
 Methods can be applied to an active carousel instance like so:
 
 ```javascript
-    $('#frame').carousel('option','hover') // Returns hover state  
-    $('#frame').carousel('option','onComplete',function() { }) // Changes onComplete function to empty function  
-    $('#frame').carousel('startAuto') // Starts automatic scrolling
+$('#frame').carousel('option','hover') // Returns hover state  
+$('#frame').carousel('option','onComplete',function() { }) // Changes onComplete function to empty function  
+$('#frame').carousel('startAuto') // Starts automatic scrolling
 ```
 
 - `option` ( *function([opt])* ):
@@ -119,12 +125,15 @@ Methods can be applied to an active carousel instance like so:
 - `fill` ( *function()* ): Fills the space of the frame element with duplicate sets of the container's children until the container is wider than the frame. This is run on initialization, but may need to be run on window.resize for example
 - `onLast` ( *bool* ): Whether the carousel is on the last object
 - `onFirst` ( *bool* ): Whether the carousel is on the first object
-- `moveTo` ( *function($e)* ): Function that can be passed a child element of the container to scroll directly to that object. Eg:
-  ```javascript
-  $(document).on('click tap','#frame > .container > *',function() {  
-    $('#frame').carousel('moveTo',$(this))  
-  })
-  ```
+- `moveTo` ( *function($e)* ): Function that can be passed a child element of the container to scroll directly to that object.
+    - Example:
+
+```javascript
+$(document).on('click tap','#frame > .container > *',function() {  
+  $('#frame').carousel('moveTo',$(this))  
+})
+```
+
 - `next` ( *function()* ): Triggers the carousel to move to the next object if available. Useful for custom navigation.
 - `prev` ( *function()* ): Triggers the carousel to move to the previous object if available. Useful for custom navigation.
 - `startAuto` ( *function()* ): Starts auto-scroll.

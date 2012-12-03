@@ -3,10 +3,10 @@
 <head>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <!--script src="../../jquery.1.8.3.min.js"></script -->
-<script src="../jquery.Carousel/jquery.Carousel.js"></script>
+<script src="../jQuery.merryGoRound/jQuery.merryGoRound.js"></script>
 <script>
 $(document).ready(function() {
-  $('#scroller').carousel({
+  $('#scroller').merrygoround({
     'focused' : $('.nojs')[1],
     'nojs_class' : 'nojs',
     'infinite': true,
@@ -26,18 +26,18 @@ $(document).ready(function() {
 //    'infinite': true
   })
   $(document).on('click tap', '#scroller li', function() {
-    $('#scroller').carousel('moveTo',$(this))
+    $('#scroller').merrygoround('moveTo',$(this))
   })
   $('button.auto').toggle(
     function() {
       $(this).addClass('active').text('Turn off Auto-Scroll')
-      $('#scroller').carousel('startAuto',$('#scrollspeed').val() * 1000)
+      $('#scroller').merrygoround('startAuto',$('#scrollspeed').val() * 1000)
       $('#scrollspeed').attr('disabled','disabled')
     },
     function() {
       $(this).removeClass('active').text('Turn on Auto-Scroll')
       $('#scrollspeed').removeAttr('disabled')
-      $('#scroller').carousel('stopAuto')
+      $('#scroller').merrygoround('stopAuto')
     })
 })
 </script>

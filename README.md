@@ -1,4 +1,4 @@
-# jQuery.Carousel.js #
+# jQuery.merryGoRound.js #
 
 A simple, lightweight jQuery plugin for horizontally-scrolling content blocks. Because what everyone really needed was one more carousel plugin.
 
@@ -10,7 +10,7 @@ by Ben Saufley ([@bensaufley](http://twitter.com/bensaufley))
 Simple **initialization** with all defaults:
 
 ```javascript
-$('#frame').carousel()
+$('#frame').merrygoround()
 ```
 
 This requires at least two things:
@@ -23,17 +23,17 @@ The container object can be styled by setting its width and floating its childre
 To **revert** to original state/remove carousel
 
 ```javascript
-$('#frame').carousel('destroy')
+$('#frame').merrygoround('destroy')
 ```
 
-One thing to note is that because of the way jQuery.Carousel loops for an infinite carousel, `$(document).on(event, '.selector', É)` must be used to apply event listeners to gallery objects.
+One thing to note is that because of the way jQuery.merryGoRound loops for an infinite carousel, `$(document).on(event, '.selector', É)` must be used to apply event listeners to gallery objects.
     
 ## Initialization Options ##
 
 Options can be set on initialization like so:
 
 ```javascript
-$('#frame').carousel({
+$('#frame').merrygoround({
   'auto'    : true,
   'easing'  : 'swing',
   'speed'   : 1500,
@@ -66,7 +66,7 @@ $('#frame').carousel({
     - Class for `div` element which will function as "previous" button. Carousel creates this element and appends it to the container object. 
     - **Default:** `'prev'`
 - `nojs_class`:
-    - Class to remove from gallery objects (and replace on `destroy`). Useful if you want to have a `:hover` state that only applies if jQuery.Carousel isn't enabled, for example.
+    - Class to remove from gallery objects (and replace on `destroy`). Useful if you want to have a `:hover` state that only applies if jQuery.merrygoround isn't enabled, for example.
     - **Default:** `false`
 - `focus_class`:
     - Class to add to the element currently in focus. Set as `false` if you don't need it.
@@ -111,15 +111,15 @@ function($sel) {
 Methods can be applied to an active carousel instance like so:
 
 ```javascript
-$('#frame').carousel('option','hover') // Returns hover state  
-$('#frame').carousel('option','onComplete',function() { }) // Changes onComplete function to empty function  
-$('#frame').carousel('startAuto') // Starts automatic scrolling
+$('#frame').merrygoround('option','hover') // Returns hover state  
+$('#frame').merrygoround('option','onComplete',function() { }) // Changes onComplete function to empty function  
+$('#frame').merrygoround('startAuto') // Starts automatic scrolling
 ```
 
 - `option` ( *function([opt])* ):
     - If one value is passed, it returns the value of the option.
     - If two values are passed, it sets the value of the option.
-- `destroy` ( *function()* ): Destroys the instance of jQuery.Carousel
+- `destroy` ( *function()* ): Destroys the instance of jQuery.merrygoround
 - `fill` ( *function()* ): Fills the space of the frame element with duplicate sets of the container's children until the container is wider than the frame. This is run on initialization, but may need to be run on window.resize for example
 - `onLast` ( *bool* ): Whether the carousel is on the last object
 - `onFirst` ( *bool* ): Whether the carousel is on the first object
@@ -127,7 +127,7 @@ $('#frame').carousel('startAuto') // Starts automatic scrolling
 
 ```javascript
 $(document).on('click tap','#frame > .container > *',function() {  
-  $('#frame').carousel('moveTo',$(this))  
+  $('#frame').merrygoround('moveTo',$(this))  
 })
 ```
 

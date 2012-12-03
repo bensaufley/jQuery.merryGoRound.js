@@ -1,12 +1,18 @@
 ###
- * jQuery.carousel
- * A simple jQuery plugin for content carousels
+ * jQuery.merryGoRound
+ * v1.0
+ * last updated 2012-12-03
+ *
+ * A simple jQuery plugin for content carousels.
+ * Full documentation available at http://github.com/bensaufley/jquery.
+ *
  * Author: Ben Saufley
  *     http://bensaufley.com
+ *
  * Based on jQuery plugin boilerplate by Jonathan Nicol @f6design
 ###
 (($) ->
-  pluginName = 'carousel'
+  pluginName = 'merrygoround'
 
   # If you want to use console, this is just
   # to make sure it works in IE, and that it's

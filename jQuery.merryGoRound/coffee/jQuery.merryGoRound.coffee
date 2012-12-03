@@ -11,6 +11,7 @@
  *
  * Based on jQuery plugin boilerplate by Jonathan Nicol @f6design
 ###
+
 (($) ->
   pluginName = 'merrygoround'
 
@@ -139,16 +140,6 @@
                 $moving[i] = $(this)
                 $(this).clone().appendTo($c)
                 false if width >= movewidth
-          else
-            if !options.typewriter
-              if onLast()
-                $next.fadeOut(speed/2)
-              else if $next.not(':visible')
-                $next.fadeIn(speed/2)
-              if onFirst()
-                $prev.fadeOut(speed/2)
-              else if $next.not(':visible')
-                $prev.fadeIn(speed/2)
           options.focused.removeClass(options.focus_class) if options.focus_class
           $c.animate
             'margin-left' : -(to.outerWidth(true)/2 + to.position().left)
@@ -161,6 +152,16 @@
                 for e, i in $moving
                   $(e).remove()
                 $c.css 'margin-left', -(options.focused.outerWidth(true)/2 + options.focused.position().left)
+              else if !options.infinite
+                if !options.typewriter
+                  if onLast()
+                    $next.fadeOut(speed/2)
+                  else if $next.not(':visible')
+                    $next.fadeIn(speed/2)
+                  if onFirst()
+                    $prev.fadeOut(speed/2)
+                  else if $next.not(':visible')
+                    $prev.fadeIn(speed/2)
               queued = false
               hook('onComplete') if !init
     

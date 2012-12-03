@@ -79,9 +79,9 @@ Options can be set on initialization like so:
     - Function that passes the currently-focused child in a jQuery object for manipulation after moving the carousel.
     - Example usage: to emphasize the newly-focused object after the focus changes:
 
-        function($sel) {
-          $sel.animate({ 'font-size' : 16px }, 300)
-        }
+    function($sel) {
+      $sel.animate({ 'font-size' : 16px }, 300)
+    }
 
     - **Default:** `function($sel) { }`
 - `onDestroy`:
@@ -111,9 +111,9 @@ Methods can be applied to an active carousel instance like so:
 - `onFirst` ( *bool* ): Whether the carousel is on the first object
 - `moveTo` ( *function($e)* ): Function that can be passed a child element of the container to scroll directly to that object. Eg:
 
-      $(document).on('click tap','#frame > .container > *',function() {
-        $('#frame').carousel('moveTo',$(this))
-      })
+  $(document).on('click tap','#frame > .container > *',function() {
+    $('#frame').carousel('moveTo',$(this))
+  })
 
 - `next` ( *function()* ): Triggers the carousel to move to the next object if available. Useful for custom navigation.
 - `prev` ( *function()* ): Triggers the carousel to move to the previous object if available. Useful for custom navigation.

@@ -2,7 +2,7 @@
 
 /*
  * jQuery.merryGoRound
- * v1.0
+ * v1.01
  * last updated 2012-12-03
  *
  * A simple jQuery plugin for content carousels.
@@ -25,7 +25,7 @@
       el = element;
       $el = $(element);
       $c = $el.children().first();
-      $next = $prev = null;
+      $next = $prev = $('');
       looper = null;
       hover = false;
       queued = false;
@@ -69,21 +69,33 @@
           $half.add($half.nextAll()).prependTo($c);
         }
         moveTo(options.focused, 0, true);
-        $next = $('<div />', {
-          'class': options.next_class,
-          'text': 'NEXT'
-        });
-        $prev = $('<div />', {
-          'class': options.prev_class,
-          'text': 'PREVIOUS'
-        });
-        $next.appendTo($el).on('click tap', next);
-        $prev.appendTo($el).on('click tap', prev);
-        if (onLast() && !options.infinite && !options.typewriter) {
-          $next.hide();
+        if (options.nextbtn !== false) {
+          if (typeof options.nextbtn === 'object') {
+            $next = options.nextbtn;
+          } else {
+            $next = $('<div />', {
+              'class': options.nextbtn,
+              'text': 'NEXT'
+            });
+            $next.appendTo($el).on('click tap', next);
+          }
+          if (onLast() && !options.infinite && !options.typewriter) {
+            $next.hide();
+          }
         }
-        if (onFirst() && !options.infinite && !options.typewriter) {
-          $prev.hide();
+        if (options.prevbtn !== false) {
+          if (typeof options.prevbtn === 'object') {
+            $prev = options.prevbtn;
+          } else {
+            $prev = $('<div />', {
+              'class': options.prevbtn,
+              'text': 'PREVIOUS'
+            });
+            $prev.appendTo($el).on('click tap', prev);
+          }
+          if (onFirst() && !options.infinite && !options.typewriter) {
+            $prev.hide();
+          }
         }
         if (options.auto) {
           startAuto();
@@ -102,7 +114,12 @@
             'left': '',
             'margin-left': ''
           });
-          $next.add($prev).remove();
+          if (typeof options.nextbtn !== 'object') {
+            $next.remove();
+          }
+          if (typeof options.prevbtn !== 'object') {
+            $prev.remove();
+          }
           stopAuto();
           if (options.nojs_class) {
             $c.addClass(options.nojs_class);
@@ -247,8 +264,8 @@
         timeout = 0;
         _results = [];
         while ($c.outerWidth() < $el.innerWidth() && timeout < 25) {
-          timeout++;
-          _results.push($c.children().clone().appendTo($c));
+          $c.children().clone().appendTo($c);
+          _results.push(timeout++);
         }
         return _results;
       };
@@ -311,8 +328,8 @@
       }
     };
     return $.fn[pluginName].defaults = {
-      next_class: 'next',
-      prev_class: 'prev',
+      nextbtn: 'next',
+      prevbtn: 'prev',
       nojs_class: false,
       focus_class: 'focus',
       focused: false,

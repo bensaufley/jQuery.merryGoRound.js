@@ -1,6 +1,6 @@
 ###
  * jQuery.merryGoRound
- * v1.0
+ * v1.01
  * last updated 2012-12-03
  *
  * A simple jQuery plugin for content carousels.
@@ -28,7 +28,7 @@
     $c=$el.children().first()
     
     # Nav elements
-    $next=$prev=null
+    $next=$prev=$('')
 
     # Auto-carousel
     looper = null
@@ -68,16 +68,24 @@
           false if width>=cwidth/2
         $half.add($half.nextAll()).prependTo($c)
       moveTo(options.focused,0,true)
-      $next = $ '<div />'
-        'class' : options.next_class
-        'text'  : 'NEXT'
-      $prev = $ '<div />'
-        'class' : options.prev_class
-        'text'  : 'PREVIOUS'
-      $next.appendTo($el).on('click tap',next)
-      $prev.appendTo($el).on('click tap',prev)
-      $next.hide() if onLast()  && !options.infinite && !options.typewriter
-      $prev.hide() if onFirst() && !options.infinite && !options.typewriter
+      if options.nextbtn != false
+        if typeof options.nextbtn =='object'
+          $next = options.nextbtn
+        else
+          $next = $ '<div />'
+            'class' : options.nextbtn
+            'text'  : 'NEXT'
+          $next.appendTo($el).on('click tap',next)
+        $next.hide() if onLast() && !options.infinite && !options.typewriter
+      if options.prevbtn != false
+        if typeof options.prevbtn == 'object'
+          $prev = options.prevbtn
+        else
+          $prev = $ '<div />'
+            'class' : options.prevbtn
+            'text'  : 'PREVIOUS'
+          $prev.appendTo($el).on('click tap',prev)
+        $prev.hide() if onFirst() && !options.infinite && !options.typewriter
       startAuto() if options.auto
       hook('onInit')
 
@@ -91,7 +99,10 @@
           'position'    : ''
           'left'        : ''
           'margin-left' : ''
-        $next.add($prev).remove()
+        if typeof options.nextbtn != 'object'
+          $next.remove()
+        if typeof options.prevbtn != 'object'
+          $prev.remove()
         stopAuto()
         $c.addClass(options.nojs_class) if options.nojs_class
         $c.find(".#{options.focus_class}").removeClass(options.focus_class) if options.focus_class
@@ -196,8 +207,8 @@
     fill = ->
       timeout = 0
       while $c.outerWidth()<$el.innerWidth() && timeout < 25
-        timeout++
         $c.children().clone().appendTo($c)
+        timeout++
     
     onLast = ->
       options.focused[0] == $c.children().last()[0]
@@ -251,8 +262,8 @@
 
   # Default plugin options.
   $.fn[pluginName].defaults =
-    next_class : 'next'
-    prev_class : 'prev'
+    nextbtn    : 'next'
+    prevbtn    : 'prev'
     nojs_class : false
     focus_class: 'focus'
     focused    : false

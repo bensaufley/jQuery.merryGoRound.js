@@ -59,12 +59,12 @@ $('#frame').merrygoround({
 - `speed`:
     - Scroll speed.
     - **Default:** `300`
-- `next_class`
-    - Class for `div` element which will function as "next" button. Carousel creates this element and appends it to the container object. 
-    - **Default:** `'next'`
-- `prev_class`:
-    - Class for `div` element which will function as "previous" button. Carousel creates this element and appends it to the container object. 
-    - **Default:** `'prev'`
+- `nextbtn`
+    - Object, or class for `div` element, which will function as "next" button. Carousel creates this element and appends it to the container object if it not given an object. Otherwise it uses the object passed.
+    - **Default:** `'next'` (string/classname)
+- `prevbtn`:
+    - Object, or class for `div` element, which will function as "previous" button. Carousel creates this element and appends it to the container object if it not given an object. Otherwise it uses the object passed.
+    - **Default:** `'prev'` (string/classname)
 - `nojs_class`:
     - Class to remove from gallery objects (and replace on `destroy`). Useful if you want to have a `:hover` state that only applies if jQuery.merrygoround isn't enabled, for example.
     - **Default:** `false`

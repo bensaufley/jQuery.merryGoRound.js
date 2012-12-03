@@ -57,7 +57,6 @@
               return false;
             }
           });
-          console.log($half);
           $half.add($half.nextAll()).prependTo($c);
         }
         moveTo(options.focused, 0, true);
@@ -123,7 +122,6 @@
               $moving = [];
               width = 0;
               if (ind > to.index()) {
-                console.log(ind, to.index());
                 to.add(to.nextUntil(options.focused)).each(function() {
                   return movewidth += $(this).outerWidth(true);
                 });
@@ -131,7 +129,6 @@
                 for (i = _i = 0, _len = fromEnd.length; _i < _len; i = ++_i) {
                   e = fromEnd[i];
                   width += $(e).outerWidth(true);
-                  console.log(i);
                   $moving[i] = $(e);
                   $(e).clone().prependTo($c);
                   if (width >= movewidth) {

@@ -53,7 +53,7 @@
           width+=$(this).outerWidth(true)
           $half=$(this)
           false if width>=$c.outerWidth(true)/2
-        console.log $half
+        # console.log $half
         $half.add($half.nextAll()).prependTo($c)
       moveTo(options.focused,0,true)
       $next = $ '<div />'
@@ -99,13 +99,12 @@
             # This is a lot of code to move the right amount of
             # children from one side to the other on scroll.
             if ind > to.index()
-              console.log ind, to.index()
+              # console.log ind, to.index()
               to.add(to.nextUntil(options.focused)).each ->
                 movewidth += $(this).outerWidth(true)
               fromEnd = Array.prototype.slice.call($c.children().last().prevUntil(options.focused).add($c.children().last())).reverse()
               for e, i in fromEnd
                 width += $(e).outerWidth(true)
-                console.log i
                 $moving[i] = $(e)
                 $(e).clone().prependTo($c)
                 break if width >= movewidth

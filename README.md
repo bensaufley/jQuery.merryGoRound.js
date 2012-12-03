@@ -71,9 +71,11 @@ Options can be set on initialization like so:
 - `onStart`:
     - Function that passes the currently-focused child in a jQuery object for manipulation before moving the carousel.
     - Example usage: to de-emphasize the focused object before the focus changes:
-        function($sel) {
-          $sel.animate({ 'font-size' : 10px }, 300)
-        }
+
+    function($sel) {
+      $sel.animate({ 'font-size' : 10px }, 300)
+    }
+
     - **Default:** `function($sel) { }`
 - `onComplete`:
     - Function that passes the currently-focused child in a jQuery object for manipulation after moving the carousel.

@@ -76,9 +76,8 @@ $('#frame').carousel({
     - **Default:** `function($sel) { }`
 - `onStart`:
     - Function that passes the currently-focused child in a jQuery object for manipulation before moving the carousel.
-    - Example usage: to de-emphasize the focused object before the focus changes.
     - **Default:** `function($sel) { }`
-    - Example:
+    - Example usage: to de-emphasize the focused object before the focus changes:
 
 ```javascript
 function($sel) {  
@@ -88,9 +87,8 @@ function($sel) {
 
 - `onComplete`:
     - Function that passes the currently-focused child in a jQuery object for manipulation after moving the carousel.
-    - Example usage: to emphasize the newly-focused object after the focus changes:
     - **Default:** `function($sel) { }`
-    - Example:
+    - Example usage: to emphasize the newly-focused object after the focus changes:
 
 ```javascript
 function($sel) {  
@@ -125,8 +123,7 @@ $('#frame').carousel('startAuto') // Starts automatic scrolling
 - `fill` ( *function()* ): Fills the space of the frame element with duplicate sets of the container's children until the container is wider than the frame. This is run on initialization, but may need to be run on window.resize for example
 - `onLast` ( *bool* ): Whether the carousel is on the last object
 - `onFirst` ( *bool* ): Whether the carousel is on the first object
-- `moveTo` ( *function($e)* ): Function that can be passed a child element of the container to scroll directly to that object.
-    - Example:
+- `moveTo` ( *function($e)* ): Function that can be passed a child element of the container to scroll directly to that object:
 
 ```javascript
 $(document).on('click tap','#frame > .container > *',function() {  

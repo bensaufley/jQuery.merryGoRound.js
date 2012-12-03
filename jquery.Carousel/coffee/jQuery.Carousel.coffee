@@ -9,6 +9,10 @@
 (($) ->
   pluginName = 'carousel'
 
+  # If you want to use console, this is just
+  # to make sure it works in IE, and that it's
+  # defined for code linters:
+  #
   # console = window.console || log: ->
 
   Plugin = (element, options) ->
@@ -27,8 +31,9 @@
     
     # Queuing
     queued = false
-    # queue  = []
 
+    # Implements defaults where the user hasn't defined explicit
+    # values for options.
     options = $.extend({}, $.fn[pluginName].defaults, options)
 
     init = ->
@@ -53,7 +58,6 @@
           width+=$(this).outerWidth(true)
           $half=$(this)
           false if width>=$c.outerWidth(true)/2
-        # console.log $half
         $half.add($half.nextAll()).prependTo($c)
       moveTo(options.focused,0,true)
       $next = $ '<div />'
@@ -99,7 +103,6 @@
             # This is a lot of code to move the right amount of
             # children from one side to the other on scroll.
             if ind > to.index()
-              # console.log ind, to.index()
               to.add(to.nextUntil(options.focused)).each ->
                 movewidth += $(this).outerWidth(true)
               fromEnd = Array.prototype.slice.call($c.children().last().prevUntil(options.focused).add($c.children().last())).reverse()
@@ -242,7 +245,7 @@
   $.fn[pluginName].defaults =
     next_class : 'next'
     prev_class : 'prev'
-    nojs_class : 'nojs'
+    nojs_class : false
     focus_class: 'focus'
     focused    : false
     infinite   : false

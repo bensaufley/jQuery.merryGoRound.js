@@ -60,8 +60,8 @@ Options can be set on initialization like so:
     - Class for `div` element which will function as "previous" button. Carousel creates this element and appends it to the container object. 
     - **Default:** `'prev'`
 - `nojs_class`:
-    - Class to signify that the frame element. Set as `false` if you don't need it. 
-    - **Default:** `'nojs'`
+    - Class to remove from gallery objects (and replace on `destroy`). Useful if you want to have a `:hover` state that only applies if jQuery.Carousel isn't enabled, for example.
+    - **Default:** `false`
 - `focus_class`:
     - Class to add to the element currently in focus. Set as `false` if you don't need it.
     - **Default:** `'focus'`

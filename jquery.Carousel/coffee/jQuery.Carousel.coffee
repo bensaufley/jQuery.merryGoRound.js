@@ -12,7 +12,7 @@
   # console = window.console || log: ->
 
   Plugin = (element, options) ->
-    el = element
+    el  = element
     $el = $(element)
     
     # Container Element
@@ -20,10 +20,14 @@
     
     # Nav elements
     $next=$prev=null
-    
+
     # Auto-carousel
     looper = null
     hover  = false
+    
+    # Queuing
+    queued = false
+    # queue  = []
 
     options = $.extend({}, $.fn[pluginName].defaults, options)
 
@@ -33,7 +37,7 @@
         'position'  : 'relative'
       $c.css
         'position'  : 'absolute'
-        'left'      : if options.infinite then 0 else '50%'
+        'left'      : '50%'
       $c.children().removeClass(options.nojs_class) if options.nojs_class
       if options.focused
         options.focused = $(options.focused)
@@ -42,12 +46,16 @@
       if options.infinite
         if $c.children().first()[0]!=options.focused[0]
           $c.children().first().add($c.children().first().nextUntil($(options.focused))).appendTo($c)
-        $(options.focused).addClass(options.focus_class) if options.focus_class
         fill()
-      else
-        $c.css
-          'margin-left' : -(options.focused.outerWidth(true)/2 + options.focused.position().left)
-        options.focused.addClass(options.focus_class) if options.focus_class          
+        width=0
+        $half=null
+        options.focused.nextAll().each ->
+          width+=$(this).outerWidth(true)
+          $half=$(this)
+          false if width>=$c.outerWidth(true)/2
+        console.log $half
+        $half.add($half.nextAll()).prependTo($c)
+      moveTo(options.focused,0,true)
       $next = $ '<div />'
         'class' : options.next_class
         'text'  : 'NEXT'
@@ -58,13 +66,11 @@
       $prev.appendTo($el).on('click tap',prev)
       $next.hide() if onLast()  && !options.infinite && !options.typewriter
       $prev.hide() if onFirst() && !options.infinite && !options.typewriter
-      if options.auto!=false
-        startAuto()
+      startAuto() if options.auto
       hook('onInit')
 
     destroy = ->
       $el.each ->
-        el = this
         $el = $(this)
         $el.css
           'overflow-x'  : ''
@@ -80,47 +86,62 @@
         hook('onDestroy')
         $el.removeData("plugin_#{pluginName}")
 
-    moveTo = (to,speed = options.speed, init) ->
-      if options.focused[0]!=to[0]
-        if options.infinite
+    moveTo = (to,speed = options.speed,init) ->
+      if !queued
+        queued = true
+        if options.focused[0]!=to[0] || init
           hook('onStart') if !init
-          width = 0
-          $first=$c.children().first()
-          $moved=$first.add($first.nextUntil(to))
-          $moved.each ->
-            width += $(this).outerWidth(true)
+          if options.infinite && !init
+            ind = options.focused.index()
+            movewidth = 0
+            $moving   = []
+            width     = 0
+            # This is a lot of code to move the right amount of
+            # children from one side to the other on scroll.
+            if ind > to.index()
+              console.log ind, to.index()
+              to.add(to.nextUntil(options.focused)).each ->
+                movewidth += $(this).outerWidth(true)
+              fromEnd = Array.prototype.slice.call($c.children().last().prevUntil(options.focused).add($c.children().last())).reverse()
+              for e, i in fromEnd
+                width += $(e).outerWidth(true)
+                console.log i
+                $moving[i] = $(e)
+                $(e).clone().prependTo($c)
+                break if width >= movewidth
+              $c.css('margin-left',"-=#{width}")
+            else
+              to.add(to.prevUntil(options.focused)).each ->
+                movewidth += $(this).outerWidth(true)
+              $c.children().first().add($c.children().first().nextUntil(options.focused)).each (i) ->
+                width += $(this).outerWidth(true)
+                $moving[i] = $(this)
+                $(this).clone().appendTo($c)
+                false if width >= movewidth
+          else
+            if !options.typewriter
+              if onLast()
+                $next.fadeOut(speed/2)
+              else if $next.not(':visible')
+                $next.fadeIn(speed/2)
+              if onFirst()
+                $prev.fadeOut(speed/2)
+              else if $next.not(':visible')
+                $prev.fadeIn(speed/2)
           options.focused.removeClass(options.focus_class) if options.focus_class
-          options.focused=to
-          $moved.clone().appendTo($c)
           $c.animate
-            'left': -width
+            'margin-left' : -(to.outerWidth(true)/2 + to.position().left)
             speed
             options.easing
             ->
+              options.focused = to
               options.focused.addClass(options.focus_class) if options.focus_class
-              $moved.remove()
-              $c.css 'left', 0
+              if options.infinite && $moving
+                for e, i in $moving
+                  $(e).remove()
+                $c.css 'margin-left', -(options.focused.outerWidth(true)/2 + options.focused.position().left)
               hook('onComplete') if !init
-        else
-          hook('onStart') if !init
-          options.focused.removeClass(options.focus_class) if options.focus_class
-          options.focused=to
-          if !options.typewriter
-            if onLast()
-              $next.fadeOut(speed/2)
-            else if $next.not(':visible')
-              $next.fadeIn(speed/2)
-            if onFirst()
-              $prev.fadeOut(speed/2)
-            else if $next.not(':visible')
-              $prev.fadeIn(speed/2)
-          $c.animate
-            'margin-left' : -(options.focused.outerWidth(true)/2 + options.focused.position().left)
-            speed
-            options.easing
-            ->
-              options.focused.addClass(options.focus_class) if options.focus_class
-              hook('onComplete') if !init
+              queued = false
     
     next = ->
       if options.infinite
@@ -133,24 +154,14 @@
     
     prev = ->
       if options.infinite
-        hook('onStart')
-        $c.children().last().clone().prependTo($c)
-        options.focused.removeClass(options.focus_class) if options.focus_class
-        options.focused=options.focused.prev()
-        $c.css 'left' : - $c.children().first().outerWidth(true)
-        $c.animate
-          'left' : 0
-          options.speed
-          options.easing
-          ->
-            $c.children().last().remove()
-            options.focused.addClass(options.focus_class) if options.focus_class
-            hook('onComplete')
+        moveTo(options.focused.prev())
       else
         if !onFirst()
           moveTo(options.focused.prev())
         else if options.typewriter
           moveTo($c.children().last())
+
+    #Auto-scrolling
     
     startAuto = (speed)->
       if speed then options.auto = speed
@@ -174,7 +185,7 @@
       
     fill = ->
       timeout = 0
-      while $c.outerWidth()<$el.innerWidth() && timeout<$c.children().length+1
+      while $c.outerWidth()<$el.innerWidth() && timeout < 25
         timeout++
         $c.children().clone().appendTo($c)
     

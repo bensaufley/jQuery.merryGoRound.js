@@ -16,22 +16,24 @@
     var Plugin, pluginName;
     pluginName = 'carousel';
     Plugin = function(element, options) {
-      var $c, $el, $next, $prev, destroy, el, fill, hook, hover, hoverUpdate, init, looper, moveTo, next, onFirst, onLast, option, prev, startAuto, stopAuto;
+      var $c, $el, $next, $prev, destroy, el, fill, hook, hover, hoverUpdate, init, looper, moveTo, next, onFirst, onLast, option, prev, queued, startAuto, stopAuto;
       el = element;
       $el = $(element);
       $c = $el.children().first();
       $next = $prev = null;
       looper = null;
       hover = false;
+      queued = false;
       options = $.extend({}, $.fn[pluginName].defaults, options);
       init = function() {
+        var $half, width;
         $el.css({
           'overflow-x': 'hidden',
           'position': 'relative'
         });
         $c.css({
           'position': 'absolute',
-          'left': options.infinite ? 0 : '50%'
+          'left': '50%'
         });
         if (options.nojs_class) {
           $c.children().removeClass(options.nojs_class);
@@ -45,18 +47,20 @@
           if ($c.children().first()[0] !== options.focused[0]) {
             $c.children().first().add($c.children().first().nextUntil($(options.focused))).appendTo($c);
           }
-          if (options.focus_class) {
-            $(options.focused).addClass(options.focus_class);
-          }
           fill();
-        } else {
-          $c.css({
-            'margin-left': -(options.focused.outerWidth(true) / 2 + options.focused.position().left)
+          width = 0;
+          $half = null;
+          options.focused.nextAll().each(function() {
+            width += $(this).outerWidth(true);
+            $half = $(this);
+            if (width >= $c.outerWidth(true) / 2) {
+              return false;
+            }
           });
-          if (options.focus_class) {
-            options.focused.addClass(options.focus_class);
-          }
+          console.log($half);
+          $half.add($half.nextAll()).prependTo($c);
         }
+        moveTo(options.focused, 0, true);
         $next = $('<div />', {
           'class': options.next_class,
           'text': 'NEXT'
@@ -73,14 +77,13 @@
         if (onFirst() && !options.infinite && !options.typewriter) {
           $prev.hide();
         }
-        if (options.auto !== false) {
+        if (options.auto) {
           startAuto();
         }
         return hook('onInit');
       };
       destroy = function() {
         return $el.each(function() {
-          el = this;
           $el = $(this);
           $el.css({
             'overflow-x': '',
@@ -104,67 +107,87 @@
         });
       };
       moveTo = function(to, speed, init) {
-        var $first, $moved, width;
+        var $moving, e, fromEnd, i, ind, movewidth, width, _i, _len;
         if (speed == null) {
           speed = options.speed;
         }
-        if (options.focused[0] !== to[0]) {
-          if (options.infinite) {
+        if (!queued) {
+          queued = true;
+          if (options.focused[0] !== to[0] || init) {
             if (!init) {
               hook('onStart');
             }
-            width = 0;
-            $first = $c.children().first();
-            $moved = $first.add($first.nextUntil(to));
-            $moved.each(function() {
-              return width += $(this).outerWidth(true);
-            });
+            if (options.infinite && !init) {
+              ind = options.focused.index();
+              movewidth = 0;
+              $moving = [];
+              width = 0;
+              if (ind > to.index()) {
+                console.log(ind, to.index());
+                to.add(to.nextUntil(options.focused)).each(function() {
+                  return movewidth += $(this).outerWidth(true);
+                });
+                fromEnd = Array.prototype.slice.call($c.children().last().prevUntil(options.focused).add($c.children().last())).reverse();
+                for (i = _i = 0, _len = fromEnd.length; _i < _len; i = ++_i) {
+                  e = fromEnd[i];
+                  width += $(e).outerWidth(true);
+                  console.log(i);
+                  $moving[i] = $(e);
+                  $(e).clone().prependTo($c);
+                  if (width >= movewidth) {
+                    break;
+                  }
+                }
+                $c.css('margin-left', "-=" + width);
+              } else {
+                to.add(to.prevUntil(options.focused)).each(function() {
+                  return movewidth += $(this).outerWidth(true);
+                });
+                $c.children().first().add($c.children().first().nextUntil(options.focused)).each(function(i) {
+                  width += $(this).outerWidth(true);
+                  $moving[i] = $(this);
+                  $(this).clone().appendTo($c);
+                  if (width >= movewidth) {
+                    return false;
+                  }
+                });
+              }
+            } else {
+              if (!options.typewriter) {
+                if (onLast()) {
+                  $next.fadeOut(speed / 2);
+                } else if ($next.not(':visible')) {
+                  $next.fadeIn(speed / 2);
+                }
+                if (onFirst()) {
+                  $prev.fadeOut(speed / 2);
+                } else if ($next.not(':visible')) {
+                  $prev.fadeIn(speed / 2);
+                }
+              }
+            }
             if (options.focus_class) {
               options.focused.removeClass(options.focus_class);
             }
-            options.focused = to;
-            $moved.clone().appendTo($c);
             return $c.animate({
-              'left': -width
+              'margin-left': -(to.outerWidth(true) / 2 + to.position().left)
             }, speed, options.easing, function() {
+              var _j, _len1;
+              options.focused = to;
               if (options.focus_class) {
                 options.focused.addClass(options.focus_class);
               }
-              $moved.remove();
-              $c.css('left', 0);
-              if (!init) {
-                return hook('onComplete');
-              }
-            });
-          } else {
-            if (!init) {
-              hook('onStart');
-            }
-            if (options.focus_class) {
-              options.focused.removeClass(options.focus_class);
-            }
-            options.focused = to;
-            if (!options.typewriter) {
-              if (onLast()) {
-                $next.fadeOut(speed / 2);
-              } else if ($next.not(':visible')) {
-                $next.fadeIn(speed / 2);
-              }
-              if (onFirst()) {
-                $prev.fadeOut(speed / 2);
-              } else if ($next.not(':visible')) {
-                $prev.fadeIn(speed / 2);
-              }
-            }
-            return $c.animate({
-              'margin-left': -(options.focused.outerWidth(true) / 2 + options.focused.position().left)
-            }, speed, options.easing, function() {
-              if (options.focus_class) {
-                options.focused.addClass(options.focus_class);
+              if (options.infinite && $moving) {
+                for (i = _j = 0, _len1 = $moving.length; _j < _len1; i = ++_j) {
+                  e = $moving[i];
+                  $(e).remove();
+                }
+                $c.css('margin-left', -(options.focused.outerWidth(true) / 2 + options.focused.position().left));
               }
               if (!init) {
-                return hook('onComplete');
+                hook('onComplete');
               }
+              return queued = false;
             });
           }
         }
@@ -182,24 +205,7 @@
       };
       prev = function() {
         if (options.infinite) {
-          hook('onStart');
-          $c.children().last().clone().prependTo($c);
-          if (options.focus_class) {
-            options.focused.removeClass(options.focus_class);
-          }
-          options.focused = options.focused.prev();
-          $c.css({
-            'left': -$c.children().first().outerWidth(true)
-          });
-          return $c.animate({
-            'left': 0
-          }, options.speed, options.easing, function() {
-            $c.children().last().remove();
-            if (options.focus_class) {
-              options.focused.addClass(options.focus_class);
-            }
-            return hook('onComplete');
-          });
+          return moveTo(options.focused.prev());
         } else {
           if (!onFirst()) {
             return moveTo(options.focused.prev());
@@ -234,7 +240,7 @@
         var timeout, _results;
         timeout = 0;
         _results = [];
-        while ($c.outerWidth() < $el.innerWidth() && timeout < $c.children().length + 1) {
+        while ($c.outerWidth() < $el.innerWidth() && timeout < 25) {
           timeout++;
           _results.push($c.children().clone().appendTo($c));
         }

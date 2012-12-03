@@ -181,10 +181,10 @@
                 }
                 $c.css('margin-left', -(options.focused.outerWidth(true) / 2 + options.focused.position().left));
               }
+              queued = false;
               if (!init) {
-                hook('onComplete');
+                return hook('onComplete');
               }
-              return queued = false;
             });
           }
         }

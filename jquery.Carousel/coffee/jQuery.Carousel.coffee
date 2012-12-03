@@ -139,8 +139,8 @@
                 for e, i in $moving
                   $(e).remove()
                 $c.css 'margin-left', -(options.focused.outerWidth(true)/2 + options.focused.position().left)
-              hook('onComplete') if !init
               queued = false
+              hook('onComplete') if !init
     
     next = ->
       if options.infinite

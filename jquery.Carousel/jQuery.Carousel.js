@@ -22,7 +22,7 @@
     queued = false;
     options = $.extend({}, $.fn[pluginName].defaults, options);
     init = function() {
-      var $half, width;
+      var $half, cwidth, width;
       $el.css({
         'overflow-x': 'hidden',
         'position': 'relative'
@@ -46,36 +46,43 @@
         fill();
         width = 0;
         $half = null;
+        console.log($c.outerWidth(true));
+        cwidth = 0;
+        $c.children().each(function() {
+          return cwidth += $(this).outerWidth(true);
+        });
         options.focused.nextAll().each(function() {
           width += $(this).outerWidth(true);
           $half = $(this);
-          if (width >= $c.outerWidth(true) / 2) {
+          if (width >= cwidth / 2) {
             return false;
           }
         });
         $half.add($half.nextAll()).prependTo($c);
       }
-      moveTo(options.focused, 0, true);
-      $next = $('<div />', {
-        'class': options.next_class,
-        'text': 'NEXT'
-      });
-      $prev = $('<div />', {
-        'class': options.prev_class,
-        'text': 'PREVIOUS'
-      });
-      $next.appendTo($el).on('click tap', next);
-      $prev.appendTo($el).on('click tap', prev);
-      if (onLast() && !options.infinite && !options.typewriter) {
-        $next.hide();
-      }
-      if (onFirst() && !options.infinite && !options.typewriter) {
-        $prev.hide();
-      }
-      if (options.auto) {
-        startAuto();
-      }
-      return hook('onInit');
+      return setTimeout(function() {
+        moveTo(options.focused, 0, true);
+        $next = $('<div />', {
+          'class': options.next_class,
+          'text': 'NEXT'
+        });
+        $prev = $('<div />', {
+          'class': options.prev_class,
+          'text': 'PREVIOUS'
+        });
+        $next.appendTo($el).on('click tap', next);
+        $prev.appendTo($el).on('click tap', prev);
+        if (onLast() && !options.infinite && !options.typewriter) {
+          $next.hide();
+        }
+        if (onFirst() && !options.infinite && !options.typewriter) {
+          $prev.hide();
+        }
+        if (options.auto) {
+          startAuto();
+        }
+        return hook('onInit');
+      }, 5000);
     };
     destroy = function() {
       return $el.each(function() {

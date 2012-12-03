@@ -59,7 +59,6 @@
         fill()
         width=0
         $half=null
-        console.log $c.outerWidth(true)
         cwidth = 0
         $c.children().each ->
           cwidth+=$(this).outerWidth(true)
@@ -68,21 +67,19 @@
           $half=$(this)
           false if width>=cwidth/2
         $half.add($half.nextAll()).prependTo($c)
-      setTimeout ->
-          moveTo(options.focused,0,true)
-          $next = $ '<div />'
-            'class' : options.next_class
-            'text'  : 'NEXT'
-          $prev = $ '<div />'
-            'class' : options.prev_class
-            'text'  : 'PREVIOUS'
-          $next.appendTo($el).on('click tap',next)
-          $prev.appendTo($el).on('click tap',prev)
-          $next.hide() if onLast()  && !options.infinite && !options.typewriter
-          $prev.hide() if onFirst() && !options.infinite && !options.typewriter
-          startAuto() if options.auto
-          hook('onInit')
-        ,5000
+      moveTo(options.focused,0,true)
+      $next = $ '<div />'
+        'class' : options.next_class
+        'text'  : 'NEXT'
+      $prev = $ '<div />'
+        'class' : options.prev_class
+        'text'  : 'PREVIOUS'
+      $next.appendTo($el).on('click tap',next)
+      $prev.appendTo($el).on('click tap',prev)
+      $next.hide() if onLast()  && !options.infinite && !options.typewriter
+      $prev.hide() if onFirst() && !options.infinite && !options.typewriter
+      startAuto() if options.auto
+      hook('onInit')
 
     destroy = ->
       $el.each ->

@@ -218,7 +218,9 @@
         }
       };
       next = function(e) {
-        e.preventDefault();
+        if (e) {
+          e.preventDefault();
+        }
         if (options.infinite) {
           return moveTo(options.focused.next());
         } else {
@@ -230,7 +232,9 @@
         }
       };
       prev = function(e) {
-        e.preventDefault();
+        if (e) {
+          e.preventDefault();
+        }
         if (options.infinite) {
           return moveTo(options.focused.prev());
         } else {

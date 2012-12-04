@@ -169,7 +169,7 @@
               hook('onComplete') if !init
     
     next = (e)->
-      e.preventDefault()
+      e.preventDefault() if e
       if options.infinite
         moveTo(options.focused.next())
       else
@@ -179,7 +179,7 @@
           moveTo($c.children().first())
     
     prev = (e)->
-      e.preventDefault()
+      e.preventDefault() if e
       if options.infinite
         moveTo(options.focused.prev())
       else

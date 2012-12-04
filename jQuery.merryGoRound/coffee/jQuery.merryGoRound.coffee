@@ -76,16 +76,19 @@
           $next = $ '<div />'
             'class' : options.nextbtn
             'text'  : 'NEXT'
-          $next.appendTo($el).on('click tap',next)
+          $next.appendTo($el)
+        $next.on('click tap',next)
         $next.hide() if onLast() && !options.infinite && !options.typewriter
       if options.prevbtn != false
         if typeof options.prevbtn == 'object'
           $prev = options.prevbtn
+          
         else
           $prev = $ '<div />'
             'class' : options.prevbtn
             'text'  : 'PREVIOUS'
-          $prev.appendTo($el).on('click tap',prev)
+          $prev.appendTo($el)
+        $prev.on('click tap',prev)
         $prev.hide() if onFirst() && !options.infinite && !options.typewriter
       startAuto() if options.auto
       hook('onInit')
@@ -165,7 +168,8 @@
               queued = false
               hook('onComplete') if !init
     
-    next = ->
+    next = (e)->
+      e.preventDefault()
       if options.infinite
         moveTo(options.focused.next())
       else
@@ -174,7 +178,8 @@
         else if options.typewriter
           moveTo($c.children().first())
     
-    prev = ->
+    prev = (e)->
+      e.preventDefault()
       if options.infinite
         moveTo(options.focused.prev())
       else

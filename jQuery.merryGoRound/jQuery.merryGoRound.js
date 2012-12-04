@@ -77,8 +77,9 @@
               'class': options.nextbtn,
               'text': 'NEXT'
             });
-            $next.appendTo($el).on('click tap', next);
+            $next.appendTo($el);
           }
+          $next.on('click tap', next);
           if (onLast() && !options.infinite && !options.typewriter) {
             $next.hide();
           }
@@ -91,8 +92,9 @@
               'class': options.prevbtn,
               'text': 'PREVIOUS'
             });
-            $prev.appendTo($el).on('click tap', prev);
+            $prev.appendTo($el);
           }
+          $prev.on('click tap', prev);
           if (onFirst() && !options.infinite && !options.typewriter) {
             $prev.hide();
           }
@@ -215,7 +217,8 @@
           }
         }
       };
-      next = function() {
+      next = function(e) {
+        e.preventDefault();
         if (options.infinite) {
           return moveTo(options.focused.next());
         } else {
@@ -226,7 +229,8 @@
           }
         }
       };
-      prev = function() {
+      prev = function(e) {
+        e.preventDefault();
         if (options.infinite) {
           return moveTo(options.focused.prev());
         } else {

@@ -248,7 +248,11 @@
         $el.on('mouseenter mouseleave', hoverUpdate);
         looper = setInterval(function() {
           if (!hover) {
-            return next();
+            if (options.infinite || !onLast()) {
+              return next();
+            } else {
+              return moveTo($c.children().first());
+            }
           }
         }, options.auto);
         return looper;

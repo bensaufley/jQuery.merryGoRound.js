@@ -195,7 +195,10 @@
       $el.on('mouseenter mouseleave',hoverUpdate)
       looper = setInterval( ->
           if !hover
-            next()
+            if options.infinite || !onLast()
+              next()
+            else
+              moveTo($c.children().first())
         options.auto)
       looper
 

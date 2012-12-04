@@ -212,8 +212,9 @@
       
     fill = ->
       timeout = 0
-      while $c.outerWidth()<$el.innerWidth() && timeout < 25
-        $c.children().clone().appendTo($c)
+      $children=$c.children().clone()
+      while $c.outerWidth()<$el.innerWidth() && timeout < 5
+        $children.appendTo($c)
         timeout++
     
     onLast = ->

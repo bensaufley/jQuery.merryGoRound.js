@@ -264,11 +264,12 @@
         return hover;
       };
       fill = function() {
-        var timeout, _results;
+        var $children, timeout, _results;
         timeout = 0;
+        $children = $c.children().clone();
         _results = [];
-        while ($c.outerWidth() < $el.innerWidth() && timeout < 25) {
-          $c.children().clone().appendTo($c);
+        while ($c.outerWidth() < $el.innerWidth() && timeout < 5) {
+          $children.appendTo($c);
           _results.push(timeout++);
         }
         return _results;
